@@ -11,7 +11,15 @@
  *
  * @var bool
  */
-define( 'WP_USE_THEMES', true );
+require('load-env.php');
+
+if (isset($_ENV["REST_API_ONLY"])=== false) {
+    $loadTheme = false;
+} else {
+    $loadTheme = $_ENV["REST_API_ONLY"]===true ? false : true;
+}
+
+define('WP_USE_THEMES', $loadTheme);
 
 /** Loads the WordPress Environment and Template */
 require __DIR__ . '/wp-blog-header.php';
